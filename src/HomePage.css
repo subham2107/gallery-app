@@ -1,0 +1,79 @@
+
+.poster {
+  width: 300px;
+  height: 500px;
+}
+
+.likeBtn {
+  background-color: rgb(115, 255, 0);
+  color: #000;
+  font-size: 16px;
+  line-height: 2; 
+  border-radius: 3px;
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+  margin-bottom: 20px;
+  min-width: 80px;
+  max-width: 80px;
+  margin-right: 20px;
+    
+  }
+
+  .likeCount {
+    margin-right: 25px;
+  }
+
+  .dislikeBtn {
+    background-color: rgb(255, 0, 55);
+    color: #000;
+    font-size: 16px;
+    line-height: 2; 
+    border-radius: 3px;
+    cursor: pointer;
+    border: none;
+    font-family: inherit;
+    margin-bottom: 20px;
+    min-width: 80px;
+    max-width: 80px;
+      
+    }
+
+.eachPhotoDiv {
+  display: flex;
+  text-align: center;
+  max-width: 300px;
+  max-height: 850px;
+  border-radius:4px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19),0 6px 6px rgba(0,0,0,0.23);
+  margin-bottom: 30px;
+  
+}
+
+.homePagePhotos {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
+  align-items: center;
+  row-gap: 50px;
+}
+
+
+@media screen and (max-width: 1065px){
+  .homePagePhotos {
+    grid-template-columns: 1fr 1fr 1fr ;
+  }
+}
+
+@media screen and (max-width: 950px){
+  .homePagePhotos {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+
+@media screen and (max-width: 625px){
+  .homePagePhotos {
+    grid-template-columns: 1fr ;
+  }
+}

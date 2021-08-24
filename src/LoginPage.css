@@ -1,0 +1,49 @@
+ 
+.form-login-btn {
+    background-color: #276ef1;
+    color: #fff;
+    font-size: 16px;
+    line-height: 2; 
+    border-radius: 3px;
+    cursor: pointer;
+    border: none;
+    font-family: inherit;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    min-width: 70px;
+    max-width: 70px; 
+    margin-left: 20px;
+
+}
+.name-input {
+  width: 200px;
+  margin-bottom: 15px;
+  margin-top: 15px;
+
+}
+
+
+.form-login-btn {
+  margin-right: 20px;
+}
+
+.loginPage {
+  /* height: 150px;
+  border: solid 1px black;
+  width: calc(100vw - 100px);
+  margin-top: 220px;
+  margin-left: 400px; */
+  
+    position: absolute;
+  
+    width: 300px;
+    height: 300px;
+  
+    /* Center form on page horizontally & vertically */
+    top: 50%;
+    left: 50%;
+    margin-top: -135px;
+    margin-left: -155px;
+    border: solid 1px;
+
+}
