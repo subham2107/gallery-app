@@ -1,3 +1,3 @@
-# Movie Rating and Review Portal
+#Gallery Webapp
 
-You can check it out here: https://my-review-portal.herokuapp.com
+You can check it out here: https://gallery-webapp.herokuapp.com/
