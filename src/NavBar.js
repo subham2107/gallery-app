@@ -17,11 +17,12 @@ class NavBar extends React.Component{
 }
 
 componentDidMount() {
+  console.log('did mount')
   fetch('/api/users/me')
   .then(response => response.json())
   .then(user => {
-    //console.log(user)
-    
+      console.log(user)
+      console.log('hi')
       this.setState({userName: user.userName});
       
     

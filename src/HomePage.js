@@ -23,21 +23,21 @@ class HomePage extends React.Component {
 componentDidMount() {
   //console.log(window.location)
   const promisePhotos = axios(`/api/photos`);
-  const promiseUsers = axios('/api/users/me');
-  Promise.all([promisePhotos, promiseUsers])
+  //const promiseUsers = axios('/api/users/me');
+  Promise.all([promisePhotos])
   
   .then(response => {
   //console.log(response);
   
   this.setState({photos: response[0].data});
-  this.setState({userId: response[1].data._id});
-  //console.log(this.state.userId);
-  //console.log(this.state.photos);
-  for(let i = 0;i<this.state.photos.length;i++) {
+  // this.setState({userId: response[1].data._id});
+  // //console.log(this.state.userId);
+  // //console.log(this.state.photos);
+  // for(let i = 0;i<this.state.photos.length;i++) {
 
-    this.setState({alreadypresentUserIndex: this.state.photos[i].choices.findIndex((a) => a.userId === this.state.userId)})
-    break;
-  }
+  //   this.setState({alreadypresentUserIndex: this.state.photos[i].choices.findIndex((a) => a.userId === this.state.userId)})
+  //   break;
+  // }
    
   //console.log (this.state.alreadypresentUserIndex)            
   });

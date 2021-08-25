@@ -33,9 +33,9 @@ class LoginPage extends React.Component {
         window.location = '/gallery';
         console.log('hi console')
       }
-      return response.json().then((body) => {
-          throw new Error(body.error)
-      })
+      // return response.json().then((body) => {
+      //     throw new Error(body.error)
+      // })
     })
     .catch((error) => {
       this.errorMessage = error.message

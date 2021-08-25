@@ -15,12 +15,12 @@ router.post('/', (req, res) => {
     User.find({ userName }).then(user => {
         // console.log(user[0]);
         // console.log('hello')
-        if (user.length!=0) {
-            res.status(200).send({message: "User already signed up"});
-            console.log('Inside session1');
-            return;
-        }
-        else if (user.length==0){
+        // if (user.length!=0) {
+        //     res.status(200).send({message: "User already signed up"});
+        //     console.log('Inside session1');
+        //     return;
+        // }
+        if (user.length==0){
             console.log('Inside session2');
             const freshUser = new User({ userName });
             freshUser.save().then((newUser) => {
@@ -30,6 +30,14 @@ router.post('/', (req, res) => {
             })
 
         }
+        else {
+            
+            const currentUser = user[0];
+            req.session.userId = currentUser._id;
+            res.status(201).send({message: "signed in"})
+        }
+         
+        
         })
 });
 
