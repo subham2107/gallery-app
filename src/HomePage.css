@@ -1,12 +1,15 @@
-
 .poster {
   width: 300px;
   height: 500px;
 }
 
+.likeCount {
+  margin-right: 25px;
+}
+
 .likeBtn {
-  background-color: rgb(115, 255, 0);
-  color: #000;
+  background-color: #41b10e;
+  color: rgb(255, 255, 255);
   font-size: 16px;
   line-height: 2; 
   border-radius: 3px;
@@ -20,14 +23,12 @@
     
   }
 
-  .likeCount {
-    margin-right: 25px;
-  }
+  
 
   .dislikeBtn {
-    background-color: rgb(255, 0, 55);
-    color: #000;
-    font-size: 16px;
+    background-color: #f12e27;
+    color: rgb(255, 255, 255);
+    font-size: 15px;
     line-height: 2; 
     border-radius: 3px;
     cursor: pointer;
@@ -38,6 +39,16 @@
     max-width: 80px;
       
     }
+  
+  button.likeBtn:disabled {
+      opacity: 0.3;
+      cursor: auto;
+  }
+
+  button.dislikeBtn:disabled {
+      opacity: 0.3;
+      cursor: auto;
+  }
 
 .eachPhotoDiv {
   display: flex;
@@ -56,6 +67,7 @@
   justify-items: center;
   align-items: center;
   row-gap: 50px;
+  margin-top: 60px;
 }
 
 

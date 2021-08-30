@@ -31,11 +31,7 @@ class LoginPage extends React.Component {
     .then((response) => {
       if (response.ok) {
         window.location = '/gallery';
-        console.log('hi console')
       }
-      // return response.json().then((body) => {
-      //     throw new Error(body.error)
-      // })
     })
     .catch((error) => {
       this.errorMessage = error.message
@@ -52,8 +48,7 @@ class LoginPage extends React.Component {
       <NavBar/>
     <div className="loginPage" style={{textAlign: 'center'}}>
       <b><h3 className='signInHeader'>Sign In</h3></b>
-      <br></br>
-      {this.state.messageLogin? <span style={{ color: 'red', marginTop: '0'}}>{this.state.messageLogin}</span> : null} 
+      <br></br> 
         <form>
         <div>
           <label>Username</label>
@@ -63,8 +58,6 @@ class LoginPage extends React.Component {
         
           <div>
             <input className='form-login-btn'  type="submit" onClick={this.onLoginClick} value="Sign in"></input>
-            
-            
           </div>
           
         </form>

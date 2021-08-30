@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import NavBar from './NavBar';
 import './HomePage.css';
 import axios from 'axios';
@@ -11,79 +10,73 @@ class HomePage extends React.Component {
     this.state = {
       photos: [],
       message: '',
-      userId: '',
-      alreadypresentUserIndex: '',
-      alreadyLiked: 'false',
-      alreadyDisliked: 'false'
   };
   
 }
 
 
 componentDidMount() {
-  //console.log(window.location)
   const promisePhotos = axios(`/api/photos`);
-  //const promiseUsers = axios('/api/users/me');
   Promise.all([promisePhotos])
   
   .then(response => {
-  //console.log(response);
-  
-  this.setState({photos: response[0].data});
-  // this.setState({userId: response[1].data._id});
-  // //console.log(this.state.userId);
-  // //console.log(this.state.photos);
-  // for(let i = 0;i<this.state.photos.length;i++) {
-
-  //   this.setState({alreadypresentUserIndex: this.state.photos[i].choices.findIndex((a) => a.userId === this.state.userId)})
-  //   break;
-  // }
-   
-  //console.log (this.state.alreadypresentUserIndex)            
+  this.setState({photos: response[0].data});           
   });
 }
+
+
 likeClick(obj){
-  //e.preventDefault();
-  //console.log(obj)
-  //console.log('like console');
   fetch(`/api/userChoices/${obj._id}`, {
       method: 'POST',
-      body: JSON.stringify({isLiked: true, isDisliked: false}),
+      body: JSON.stringify({isLiked: true}),
       headers: {
         'Content-type': 'application/json; charset=UTF-8'
       }
     })
-    .then(res => {
-      if (res.status === 201) {
-        //this.state.photos
-        this.setState({alreadyLiked: 'true'});
-        window.location.reload();
-      }
+    .then(res => res.json())
+    .then(data => {
+      this.setState(prevState => {
+        this.state.photos = prevState.photos;
+        const index = this.state.photos.findIndex((x) => x._id === obj._id);
+        this.state.photos[index].hasLiked = data.hasLiked;
+        this.state.photos[index].hasDisliked = data.hasDisliked;
+        this.state.photos[index].likeCount = data.likeCount;
+        this.state.photos[index].dislikeCount = data.dislikeCount;
+        return prevState;
+    });    
     })
+  
     .catch((error) => {
         this.errorMessage = error.message
         this.setState({message: this.errorMessage});
       });
   
-  }
+  
+}
 
- dislikeClick(obj){
-    //e.preventDefault();
-    //console.log(obj)
-    //console.log('dislike console');
+ dislikeClick(obj) {
+    
     fetch(`/api/userChoices/${obj._id}`, {
         method: 'POST',
-        body: JSON.stringify({isLiked: false, isDisliked: true}),
+        body: JSON.stringify({isDisliked: true}),
         headers: {
           'Content-type': 'application/json; charset=UTF-8'
         }
       })
-      .then(res => {
-        if (res.status === 201) {
-          this.setState({alreadyDisliked: 'true'});
-          window.location.reload();
-        }
-      })
+      .then(res => res.json())
+      .then(data => {
+        
+        this.setState(prevState => {
+          this.state.photos = prevState.photos;
+          const index = this.state.photos.findIndex((x) => x._id === obj._id);
+          this.state.photos[index].hasLiked = data.hasLiked;
+          this.state.photos[index].hasDisliked = data.hasDisliked;
+          this.state.photos[index].likeCount = data.likeCount;
+          this.state.photos[index].dislikeCount = data.dislikeCount;
+          return prevState;
+        });
+      }
+      )
       .catch((error) => {
           this.errorMessage = error.message
           this.setState({message: this.errorMessage});
@@ -101,8 +94,6 @@ likeClick(obj){
       <div className="HomePage">
         <div style={{minHeight: "calc(100vh - 31px)"}}>
         <NavBar/>
-        
-        <br></br>
         <div className="homePagePhotos" >
         {(this.state.photos).map((eachPhoto) => (
         
@@ -112,15 +103,9 @@ likeClick(obj){
           <h4>Author: {(eachPhoto.authorName)}</h4>
           
           <div>
-            {this.state.alreadyLiked==='true'?<button className="likeBtn" disabled><b>LIKE</b></button>
-            :<button className="likeBtn" onClick={() => this.likeClick({isLiked: true, isDisliked: false, _id: eachPhoto._id})}><b>LIKE</b></button>
-            }
-            {
-              this.state.alreadyDisliked==='true'?<button className="dislikeBtn" disabled><b>DISLIKE</b></button>
-              :<button  className="dislikeBtn" onClick={() => this.dislikeClick({isLiked: false, isDisliked: true, _id: eachPhoto._id})}><b>DISLIKE</b></button>
-              
-            }
-                   
+            
+            <button className="likeBtn"  disabled={eachPhoto.hasLiked} onClick={() => this.likeClick({isLiked: true,_id: eachPhoto._id})}>LIKE</button>
+            <button  className="dislikeBtn"  disabled={eachPhoto.hasDisliked} onClick={() => this.dislikeClick({isDisliked: true, _id: eachPhoto._id})}>DISLIKE</button>   
           </div>
           <div>
           <b><span className='likeCount'>{(eachPhoto.likeCount)} Likes</span></b>

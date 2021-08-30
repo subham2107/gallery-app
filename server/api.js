@@ -6,7 +6,7 @@ const sessions = require('./routes/sessions');
 const photos = require('./routes/photos');
 const userChoices = require('./routes/userChoices');
 
-// Add json and urlencoded middleware
+
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 
