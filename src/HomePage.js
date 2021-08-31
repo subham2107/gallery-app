@@ -38,10 +38,10 @@ likeClick(obj){
       this.setState(prevState => {
         this.state.photos = prevState.photos;
         const index = this.state.photos.findIndex((x) => x._id === obj._id);
-        this.state.photos[index].hasLiked = data.hasLiked;
-        this.state.photos[index].hasDisliked = data.hasDisliked;
-        this.state.photos[index].likeCount = data.likeCount;
-        this.state.photos[index].dislikeCount = data.dislikeCount;
+        prevState.photos[index].hasLiked = data.hasLiked;
+        prevState.photos[index].hasDisliked = data.hasDisliked;
+        prevState.photos[index].likeCount = data.likeCount;
+        prevState.photos[index].dislikeCount = data.dislikeCount;
         return prevState;
     });    
     })
@@ -69,10 +69,10 @@ likeClick(obj){
         this.setState(prevState => {
           this.state.photos = prevState.photos;
           const index = this.state.photos.findIndex((x) => x._id === obj._id);
-          this.state.photos[index].hasLiked = data.hasLiked;
-          this.state.photos[index].hasDisliked = data.hasDisliked;
-          this.state.photos[index].likeCount = data.likeCount;
-          this.state.photos[index].dislikeCount = data.dislikeCount;
+          prevState.photos[index].hasLiked = data.hasLiked;
+          prevState.photos[index].hasDisliked = data.hasDisliked;
+          prevState.photos[index].likeCount = data.likeCount;
+          prevState.photos[index].dislikeCount = data.dislikeCount;
           return prevState;
         });
       }
