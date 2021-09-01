@@ -5,11 +5,16 @@ const bcrypt = require('bcryptjs');
 
 router.post('/', (req, res) => {
     if (!req.body) {
-        res.status(400).send({error: "Enter username"});
+        res.status(400).send({error: "Enter email-Id"});
         return;
     }
 
-    const { userName, password } = req.body;
+    const { emailId, userName, password } = req.body;
+
+    if (!emailId) {
+        res.status(400).send({error: "Enter email-Id"});
+        return;
+    }
 
     if (!userName) {
         res.status(400).send({error: "Enter username"});
@@ -21,10 +26,10 @@ router.post('/', (req, res) => {
         return;
     }
 
-    User.find({ userName }).then(user => {
+    User.find({ emailId }).then(user => {
         if (user.length==0){
             const hash = bcrypt.hashSync(password);
-            const freshUser = new User({ userName, password: hash });
+            const freshUser = new User({ emailId, userName, password: hash });
             freshUser.save().then((newUser) => {
             req.session.userId = newUser._id;
             res.status(201).send({message: "New user signed up"});
@@ -33,6 +38,11 @@ router.post('/', (req, res) => {
 
         }
         else {
+            if(user[0].userName !== userName) {
+                res.status(400).send({error: "Incorrect username"});
+                return;
+            }
+
             const match = bcrypt.compareSync(password, user[0].password);
 
             if (!match) {

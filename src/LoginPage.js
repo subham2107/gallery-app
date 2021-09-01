@@ -7,6 +7,7 @@ class LoginPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      emailId: '',
       userName: '',
       password: '',
       messageLogin: ''
@@ -20,10 +21,10 @@ class LoginPage extends React.Component {
 
   onLoginClick = e => {
     e.preventDefault();
-    const { userName, password } = this.state;
+    const { emailId, userName, password } = this.state;
     fetch('/api/sessions', {
       method: 'POST',
-      body: JSON.stringify({ userName, password }),
+      body: JSON.stringify({ emailId, userName, password }),
       headers: {
         'Content-type': 'application/json; charset=UTF-8'
       }
@@ -34,11 +35,11 @@ class LoginPage extends React.Component {
         window.location = '/gallery';
       }
       return response.json().then((body) => {
-        throw new Error(body.error)
+        throw new Error(body.error);
       })
     })
     .catch((error) => {
-      this.errorMessage = error.message
+      this.errorMessage = error.message;
       this.setState({messageLogin: this.errorMessage});
     });
     
@@ -55,13 +56,18 @@ class LoginPage extends React.Component {
       {this.state.messageLogin? <span className ='error-span'>{this.state.messageLogin}</span> : null} 
         <form>
           <div className = 'form-data'>
+          <div>
+          <label className='emailId-label'>Email-Id <span className = 'star'>*</span></label>
+          <br></br>
+          <input className='emailId-input' placeholder="Enter email-Id" name="emailId" required type="email" required onInput={this.onInput} value={this.state.emailId}></input>
+        </div>
         <div>
-          <label className='userName-label'>Username</label>
+          <label className='userName-label'>Username <span className = 'star'>*</span></label>
           <br></br>
           <input className='name-input' placeholder="Enter name" name="userName" required type="text" required onInput={this.onInput} value={this.state.userName}></input>
         </div>
         <div>
-        <label className='password-label'>Password</label>
+        <label className='password-label'>Password <span className = 'star'>*</span></label>
           <br></br>
           <input className='password-input' placeholder="Enter password" name="password" required type="password" onInput={this.onInput} value={this.state.password}></input>
         </div>
