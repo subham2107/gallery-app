@@ -59,12 +59,12 @@ class LoginPage extends React.Component {
           <div>
           <label className='emailId-label'>Email-Id <span className = 'star'>*</span></label>
           <br></br>
-          <input className='emailId-input' placeholder="Enter Email-Id" name="emailId" required type="email" required onInput={this.onInput} value={this.state.emailId}></input>
+          <input className='emailId-input' placeholder="Enter Email-Id" name="emailId" required type="email" onInput={this.onInput} value={this.state.emailId}></input>
         </div>
         <div>
           <label className='userName-label'>Username <span className = 'star'>*</span></label>
           <br></br>
-          <input className='name-input' placeholder="Enter Name" name="userName" required type="text" required onInput={this.onInput} value={this.state.userName}></input>
+          <input className='name-input' placeholder="Enter Name" name="userName" required type="text" onInput={this.onInput} value={this.state.userName}></input>
         </div>
         <div>
         <label className='password-label'>Password <span className = 'star'>*</span></label>
